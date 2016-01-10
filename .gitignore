@@ -2,8 +2,6 @@
 *.apk
 *.ap_
 *.iml
-.gradle
-/local.properties
 /.idea
 
 # Files for the Dalvik VM
