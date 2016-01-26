@@ -1,1 +1,1 @@
-include ':app', ':analyzers'
+include ':app', ':analyzers', ':tm'
