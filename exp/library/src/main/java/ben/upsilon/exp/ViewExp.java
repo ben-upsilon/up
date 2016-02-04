@@ -11,6 +11,7 @@ import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 
 /**
+ * 注解去获取view id
  * Created by ben on 14/11/8.
  */
 public final class ViewExp {
@@ -26,6 +27,27 @@ public final class ViewExp {
                 id _id=field.getAnnotation(id.class);
                 if(null!=_id){
                    View view= _context.findViewById(_id.value());
+                    if (null != view) {
+                        field.setAccessible(true);
+                        try {
+                            field.set(_context, view);
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public static void init(View _context) {
+        Field[] fields = _context.getClass().getDeclaredFields();
+        if (null != fields && fields.length > 0) {
+            for (Field field : fields) {
+                Log.d(LogTag, field.toGenericString());
+                id _id = field.getAnnotation(id.class);
+                if (null != _id) {
+                    View view = _context.findViewById(_id.value());
                     if (null != view) {
                         field.setAccessible(true);
                         try {
