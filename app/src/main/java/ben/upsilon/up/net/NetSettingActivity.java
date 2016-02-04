@@ -1,4 +1,4 @@
-package ben.upsilon.analyzers.net;
+package ben.upsilon.up.net;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,2 +1,2 @@
-include ':app', ':analyzers', ':tm'
+include ':app'
 include ':exp:library'

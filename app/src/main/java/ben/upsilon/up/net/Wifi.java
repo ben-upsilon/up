@@ -1,4 +1,4 @@
-package ben.upsilon.analyzers.net;
+package ben.upsilon.up.net;
 
 /**
  * Created by ben on 1/8/16.

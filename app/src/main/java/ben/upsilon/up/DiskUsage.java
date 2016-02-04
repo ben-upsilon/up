@@ -1,4 +1,4 @@
-package ben.upsilon.analyzers.files;
+package ben.upsilon.up;
 
 /**
  * 磁盘空间使用量

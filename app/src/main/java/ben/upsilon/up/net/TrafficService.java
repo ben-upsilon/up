@@ -1,16 +1,21 @@
-package ben.upsilon.analyzers.net;
+package ben.upsilon.up.net;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.PixelFormat;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.WindowManager;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
+
 
 /**
  * Created by ben on 1/10/16
@@ -18,6 +23,8 @@ import java.util.Arrays;
 public class TrafficService extends Service {
 
 
+    private static int mFloatViewWidth = 50;
+    private static int mFloatViewHeight = 80;
     // 系统流量文件
     public final String DEV_FILE = "/proc/self/net/dev";
     // wifi
@@ -25,7 +32,6 @@ public class TrafficService extends Service {
     // 流量数据
     String[] wifiData = {"0", "0", "0", "0", "0", "0", "0", "0", "0", "0",
             "0", "0", "0", "0", "0", "0"};
-
     // 用来存储前一个时间点的数据
     String[] data = {"0", "0", "0", "0",};
     private Handler mHandler;
@@ -39,11 +45,12 @@ public class TrafficService extends Service {
             mHandler.postDelayed(mRunnable, 1000);
         }
     };
-
-    @Override
-    public void onStart(Intent intent, int startId) {
-
-    }
+    private WindowManager mWindowManager;
+    private WindowManager.LayoutParams mLayoutParams;
+    private LayoutInflater mLayoutInflater;
+    private TextView mFloatView;
+    private int mCurrentX;
+    private int mCurrentY;
 
     /**
      * 在服务结束时删除消息队列
@@ -54,6 +61,35 @@ public class TrafficService extends Service {
         super.onDestroy();
     }
 
+    private void createView() {
+        // TODO Auto-generated method stub
+        //加载布局文件
+//        mFloatView = mLayoutInflater.inflate(R.layout.main, null);
+        mFloatView = new TextView(this);
+
+        mFloatView.setText("hello");
+        mFloatView.setBackgroundColor(getResources().getColor(android.R.color.background_dark, getTheme()));
+        //为View设置监听，以便处理用户的点击和拖动
+//        mFloatView.setOnTouchListener(new OnFloatViewTouchListener());
+       /*为View设置参数*/
+        mLayoutParams = new WindowManager.LayoutParams();
+        //设置View默认的摆放位置
+        mLayoutParams.gravity = Gravity.START | Gravity.TOP;
+        //设置window type
+        mLayoutParams.type = WindowManager.LayoutParams.TYPE_PHONE;//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //设置背景为透明
+        mLayoutParams.format = PixelFormat.RGBA_8888;
+        //注意该属性的设置很重要，FLAG_NOT_FOCUSABLE使浮动窗口不获取焦点,若不设置该属性，屏幕的其它位置点击无效，应为它们无法获取焦点
+        mLayoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+        //设置视图的显示位置，通过WindowManager更新视图的位置其实就是改变(x,y)的值
+        mCurrentX = mLayoutParams.x = 50;
+        mCurrentY = mLayoutParams.y = 50;
+        //设置视图的宽、高
+        mLayoutParams.width = 100;
+        mLayoutParams.height = 100;
+        //将视图添加到Window中
+        mWindowManager.addView(mFloatView, mLayoutParams);
+    }
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -63,14 +99,22 @@ public class TrafficService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        final FloatView view = new FloatView(this);
-        view.show();
+        //初始化WindowManager对象和LayoutInflater对象
+        mWindowManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        mLayoutInflater = LayoutInflater.from(this);
+        TextView tv = new TextView(this);
+        tv.setText("hello");
         mHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 if (msg.what == 1) {
-                    System.out.println((float) (msg.arg1 / 1024) + "kb/s");
+                    int data = msg.arg1;
+
+                    if (data / 1024 > 0)
+                        System.out.println((float) (msg.arg1 / 1024) + "kb/s");
+                    else
+                        System.out.println((float) (msg.arg1) + "b/s");
 //                    view.tv_show.setText((float) (msg.arg1 / (1024 * 3))
 //                            + "k/s");
 
@@ -78,7 +122,7 @@ public class TrafficService extends Service {
             }
         };
         mHandler.postDelayed(mRunnable, 0);
-
+        createView();
     }
 
     public void readDev() {
@@ -100,12 +144,12 @@ public class TrafficService extends Service {
             while ((line = bufr.readLine()) != null) {
                 data_temp = line.trim().split(":");
                 if (line.contains(WIFILINE)) {
-                    Log.d("ben.upsilon", "data_temp > " + Arrays.toString(data_temp));
-                    Log.d("ben.upsilon", "line > " + line);
+//                    Log.d("ben.upsilon", "data_temp > " + Arrays.toString(data_temp));
+//                    Log.d("ben.upsilon", "line > " + line);
                     netData = data_temp[1].trim().replaceAll("\\s+", " ").split(" ");
 
-                    Log.d("ben.upsilon", "netData > " + Arrays.toString(netData));
-                    Log.d("ben.upsilon", "netData > " + netData.length);
+//                    Log.d("ben.upsilon", "netData > " + Arrays.toString(netData));
+//                    Log.d("ben.upsilon", "netData > " + netData.length);
                     for (k = 0, j = 0; k < wifiData.length; k++) {
                         wifiData[j] = netData[k];
                         j++;
@@ -140,7 +184,7 @@ public class TrafficService extends Service {
         data[3] = wifiData[9];
 
         // 每秒下载的字节数
-        int traffic_data =  delta[0];
+        int traffic_data = delta[0];
         Message msg = mHandler.obtainMessage();
         msg.what = 1;
         msg.arg1 = traffic_data;
