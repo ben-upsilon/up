@@ -10,7 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import ben.upsilon.analyzers.R;
+import ben.upsilon.up.R;
+
 
 public class NetSettingActivity extends AppCompatActivity {
 

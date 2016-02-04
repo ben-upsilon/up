@@ -12,7 +12,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import ben.upsilon.analyzers.net.TrafficService;
+import ben.upsilon.up.net.TrafficService;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -64,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                     Uri.parse("package:" + getPackageName()));
             startActivityForResult(intent, REQUEST_CODE);
+        } else {
+            startService(new Intent(this, TrafficService.class));
         }
     }
 
@@ -72,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE) {
             if (Settings.canDrawOverlays(this)) {
                 // continue here - permission was granted
-                startService(new Intent(MainActivity.this, TrafficService.class));
+                startService(new Intent(this, TrafficService.class));
             }
         }
     }
