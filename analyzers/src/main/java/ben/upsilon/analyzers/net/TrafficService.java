@@ -1,4 +1,4 @@
-package ben.upsilon.analyzers;
+package ben.upsilon.analyzers.net;
 
 import android.app.Service;
 import android.content.Intent;
@@ -18,21 +18,17 @@ import java.util.Arrays;
 public class TrafficService extends Service {
 
 
-    private Handler mHandler;
-
     // 系统流量文件
     public final String DEV_FILE = "/proc/self/net/dev";
-
+    // wifi
+    final String WIFILINE = "wlan0";
     // 流量数据
     String[] wifiData = {"0", "0", "0", "0", "0", "0", "0", "0", "0", "0",
             "0", "0", "0", "0", "0", "0"};
 
     // 用来存储前一个时间点的数据
     String[] data = {"0", "0", "0", "0",};
-
-    // wifi
-    final String WIFILINE = "wlan0";
-
+    private Handler mHandler;
     /**
      * 定义线程周期性地获取网速
      */
@@ -49,8 +45,6 @@ public class TrafficService extends Service {
 
     }
 
-    ;
-
     /**
      * 在服务结束时删除消息队列
      */
@@ -59,8 +53,6 @@ public class TrafficService extends Service {
         mHandler.removeCallbacks(mRunnable);
         super.onDestroy();
     }
-
-    ;
 
     @Override
     public IBinder onBind(Intent intent) {
