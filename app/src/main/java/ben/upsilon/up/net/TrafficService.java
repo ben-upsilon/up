@@ -147,7 +147,7 @@ public class TrafficService extends Service {
         // 读取文件，并对读取到的文件进行操作
         try {
             while ((line = bufr.readLine()) != null) {
-                Log.d("ben.upsilon", "line > " + line);
+//                Log.d("ben.upsilon", "line > " + line);
                 data_temp = line.trim().split(":");
 
                 if (line.contains(WIFILINE)) {
@@ -179,8 +179,8 @@ public class TrafficService extends Service {
         readDev();
 
         // 计算增量
-        int[] delta = new int[4];
-        delta[0] = Integer.parseInt(wifiData[0]) - Integer.parseInt(data[0]);
+        long[] delta = new long[4];
+        delta[0] = Long.parseLong(wifiData[0]) - Long.parseLong(data[0]);
         delta[1] = Integer.parseInt(wifiData[1]) - Integer.parseInt(data[1]);
         delta[2] = Integer.parseInt(wifiData[8]) - Integer.parseInt(data[2]);
         delta[3] = Integer.parseInt(wifiData[9]) - Integer.parseInt(data[3]);
@@ -191,12 +191,12 @@ public class TrafficService extends Service {
         data[3] = wifiData[9];
 
         // 每秒下载的字节数
-        int Receive_data = delta[0];
-        int Transmit_data = delta[2];
+        long Receive_data = delta[0];
+        long Transmit_data = delta[2];
         Message msg = mHandler.obtainMessage();
         msg.what = 1;
-        msg.arg1 = Receive_data;
-        msg.arg2 = Transmit_data;
+        msg.arg1 = (int) Receive_data;
+        msg.arg2 = (int) Transmit_data;
         mHandler.sendMessage(msg);
     }
 
@@ -237,4 +237,6 @@ public class TrafficService extends Service {
         }
 
     }
+
+
 }
