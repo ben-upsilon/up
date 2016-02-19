@@ -1,4 +1,4 @@
-package ben.upsilon.up;
+package ben.upsilon.up.rss;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import ben.upsilon.exp.HttpExp;
+import ben.upsilon.up.R;
 
 public class RSSActivity extends AppCompatActivity {
 

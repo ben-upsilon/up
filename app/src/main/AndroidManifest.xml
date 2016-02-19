@@ -24,7 +24,7 @@
         <service android:name=".net.TrafficService" />
 
         <activity
-            android:name=".RSSActivity"
+            android:name=".rss.RSSActivity"
             android:label="@string/title_activity_rss"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -43,6 +43,16 @@
             android:label="Being Date">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".done.DoneActivity"
+            android:label="@string/title_activity_done"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
