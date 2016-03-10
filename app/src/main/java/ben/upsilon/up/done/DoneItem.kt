@@ -22,8 +22,6 @@ class DoneItemAdapter(val items: List<DoneItem>, val mListener: OnListInteractio
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        //        holder?.mItem = items[position]
-        //        holder?.mIdView?.text = items[position].id
         holder?.mContentView?.text = items[position].content
 
         holder?.mView?.setOnClickListener({
