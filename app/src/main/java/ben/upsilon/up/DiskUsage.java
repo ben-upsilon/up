@@ -8,9 +8,6 @@ import ben.upsilon.up.done.DoneItem;
  */
 public class DiskUsage {
 
-    DoneItem item;
 
-    void hello(){
-    }
 
 }
