@@ -116,12 +116,12 @@ public class TrafficService extends Service {
 
                     if (data / 1024 > 0)
 //                        System.out.println((float) (msg.arg1 / 1024) + "kb/s");
-                        mFloatView.setText((float) (msg.arg1 / 1024) + "kb/s\n" + (float) (msg.arg2 / 1024) + "kb/s");
+                        mFloatView.setText("↓ " + (float) (msg.arg1 / 1024) + "kb/s\n" + "↑ " + (float) (msg.arg2 / 1024) + "kb/s");
                     else
 //                        System.out.println((float) (msg.arg1) + "b/s");
 //                    view.tv_show.setText((float) (msg.arg1 / (1024 * 3))
 //                            + "k/s");
-                        mFloatView.setText((msg.arg1) + "b/s\n" + msg.arg2 + "b/s");
+                        mFloatView.setText("↓ " + (msg.arg1) + "b/s\n" + "↑ " + msg.arg2 + "b/s");
 
                 }
             }

@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
-import java.lang.reflect.Field
 
 /**
  * Created by ben on 3/27/16.
@@ -74,11 +73,11 @@ object Exp {
 
 }
 
-fun runAsync(action: () -> Unit) {
+fun onAsync(action: () -> Unit) {
     Thread(Runnable(action)).start()
 }
 
-fun runOnUiThread(action: () -> Unit) {
+fun onUI(action: () -> Unit) {
     Handler(Looper.getMainLooper()).post(Runnable(action))
 }
 
