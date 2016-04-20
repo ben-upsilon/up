@@ -8,18 +8,13 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.WindowManager;
+import android.view.*;
 import android.widget.TextView;
+import ben.upsilon.up.R;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
-import ben.upsilon.up.R;
 
 
 /**
@@ -28,14 +23,10 @@ import ben.upsilon.up.R;
 public class TrafficService extends Service {
 
 
-    // 系统流量文件
     public final String DEV_FILE = "/proc/self/net/dev";
-    // wifi
     final String WIFILINE = "wlan0";
-    // 流量数据
     String[] wifiData = {"0", "0", "0", "0", "0", "0", "0", "0", "0", "0",
             "0", "0", "0", "0", "0", "0"};
-    // 用来存储前一个时间点的数据
     String[] data = {"0", "0", "0", "0",};
     private Handler mHandler;
     /**
@@ -170,27 +161,21 @@ public class TrafficService extends Service {
 
     }
 
-    /**
-     * 实时读取系统流量文件，更新
-     */
     public void refresh() {
-        // 读取系统流量文件
 
         readDev();
 
-        // 计算增量
         long[] delta = new long[4];
         delta[0] = Long.parseLong(wifiData[0]) - Long.parseLong(data[0]);
-        delta[1] = Integer.parseInt(wifiData[1]) - Integer.parseInt(data[1]);
-        delta[2] = Integer.parseInt(wifiData[8]) - Integer.parseInt(data[2]);
-        delta[3] = Integer.parseInt(wifiData[9]) - Integer.parseInt(data[3]);
+        delta[1] = Long.parseLong(wifiData[1]) - Long.parseLong(data[1]);
+        delta[2] = Long.parseLong(wifiData[8]) - Long.parseLong(data[2]);
+        delta[3] = Long.parseLong(wifiData[9]) - Long.parseLong(data[3]);
 
         data[0] = wifiData[0];
         data[1] = wifiData[1];
         data[2] = wifiData[8];
         data[3] = wifiData[9];
 
-        // 每秒下载的字节数
         long Receive_data = delta[0];
         long Transmit_data = delta[2];
         Message msg = mHandler.obtainMessage();
@@ -200,7 +185,6 @@ public class TrafficService extends Service {
         mHandler.sendMessage(msg);
     }
 
-    /*该方法用来更新视图的位置，其实就是改变(LayoutParams.x,LayoutParams.y)的值*/
     private void updateFloatView() {
         mLayoutParams.x = mCurrentX;
         mLayoutParams.y = mCurrentY;
@@ -216,11 +200,7 @@ public class TrafficService extends Service {
             Log.i("ben.upsilon", "mCurrentX: " + mCurrentX + ",mCurrentY: "
                     + mCurrentY + ",mFloatViewWidth: " + mFloatViewWidth
                     + ",mFloatViewHeight: " + mFloatViewHeight);
-           /*
-            * getRawX(),getRawY()这两个方法很重要。通常情况下，我们使用的是getX(),getY()来获得事件的触发点坐标，
-            * 但getX(),getY()获得的是事件触发点相对与视图左上角的坐标；而getRawX(),getRawY()获得的是事件触发点
-            * 相对与屏幕左上角的坐标。由于LayoutParams中的x,y是相对与屏幕的，所以需要使用getRawX(),getRawY()。
-            */
+
             mCurrentX = (int) event.getRawX() - mFloatViewWidth;
             mCurrentY = (int) event.getRawY() - mFloatViewHeight;
             int action = event.getAction();
