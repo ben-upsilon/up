@@ -1,1 +1,1 @@
-include ':app', ':rss', ':timestamp'
+include ':app', ':rss', ':timestamp', ':uplibrary'

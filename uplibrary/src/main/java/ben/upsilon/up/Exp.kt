@@ -4,11 +4,9 @@ import android.os.Handler
 import android.os.Looper
 
 /**
- * Created by ben on 3/27/16.
+ * Created by ben on 16/8/25.
  */
-object Exp {
-
-
+class Exp {
 }
 
 fun onAsync(action: () -> Unit) {
