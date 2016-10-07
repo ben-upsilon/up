@@ -3,9 +3,6 @@ package ben.upsilon.up
 import android.os.Handler
 import android.os.Looper
 
-/**
- * Created by ben on 16/8/25.
- */
 class Exp {
 }
 

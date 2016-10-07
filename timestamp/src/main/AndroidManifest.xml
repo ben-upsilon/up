@@ -18,6 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-    </application>
 
+        <provider
+            android:name=".MyContentProvider"
+            android:authorities="ben.upsilon"
+            android:enabled="true"
+            android:exported="false">
+        </provider>
+    </application>
 </manifest>
