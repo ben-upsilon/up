@@ -18,6 +18,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/services/com.fasterxml.jackson.core.ObjectCodec'
+        exclude 'META-INF/services/com.fasterxml.jackson.core.JsonFactory'
+        exclude 'META-INF/maven/com.squareup.okhttp/okhttp/pom.properties'
+        exclude 'META-INF/maven/com.fasterxml.jackson.core/jackson-core/pom.xml'
+        exclude 'META-INF/maven/com.squareup.okio/okio/pom.properties'
+        exclude 'META-INF/maven/com.fasterxml.jackson.core/jackson-databind/pom.xml'
+        exclude 'META-INF/maven/com.fasterxml.jackson.core/jackson-databind/pom.properties'
+        exclude 'META-INF/maven/com.fasterxml.jackson.core/jackson-core/pom.properties'
+        exclude 'META-INF/maven/com.squareup.okio/okio/pom.xml'
+        exclude 'META-INF/maven/com.squareup.okhttp/okhttp/pom.xml'
+        exclude 'META-INF/maven/com.fasterxml.jackson.core/jackson-annotations/pom.properties'
+        exclude 'META-INF/maven/com.fasterxml.jackson.core/jackson-annotations/pom.xml'
+        exclude 'META-INF/LICENSE'
+    }
 
 }
 
@@ -27,4 +42,6 @@ dependencies {
     compile 'com.android.support:design:23.2.1'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile 'com.android.support:recyclerview-v7:23.2.1'
+    compile 'com.wilddog.client:wilddog-sync-android:2.0.2'
+//    compile 'com.wilddog.client:wilddog-auth-android:2.0.2'
 }

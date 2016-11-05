@@ -17,9 +17,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 
-/**
- * Created by ben on 1/10/16
- */
 public class TrafficService extends Service {
 
 
