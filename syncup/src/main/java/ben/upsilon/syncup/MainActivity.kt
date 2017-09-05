@@ -19,6 +19,7 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         nsdManager = applicationContext.getSystemService(Context.NSD_SERVICE) as NsdManager
         reg.setOnClickListener { registerService() }
         dis.setOnClickListener { discoverService() }
@@ -59,7 +60,7 @@ class MainActivity : Activity() {
             port = sock.localPort
             sock.close()
         } catch (e: Exception) {
-            Toast.makeText(applicationContext, "can not set port", Toast.LENGTH_SHORT)
+            Toast.makeText(applicationContext, "can not set port", Toast.LENGTH_SHORT).show()
         }
 
         // 注冊网络服务的名称、类型、端口
