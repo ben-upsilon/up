@@ -31,10 +31,8 @@ public class AppSignatureInfo {
         }
         for (Signature sig : sigs) {
             Log.d(TAG, "onCreate: " + "Signature hashcode : " + sig.hashCode());
-
             final byte[] rawCert = sig.toByteArray();
             InputStream certStream = new ByteArrayInputStream(rawCert);
-
             final CertificateFactory certFactory;
             final X509Certificate x509Cert;
             try {
@@ -47,7 +45,6 @@ public class AppSignatureInfo {
             } catch (CertificateException e) {
                 // e.printStackTrace();
             }
-
             byte[] hexBytes = sig.toByteArray();
             MessageDigest digest = null;
             try {
@@ -64,10 +61,7 @@ public class AppSignatureInfo {
                 }
                 String fingerprintMD5 = sb.toString();
                 Log.d(TAG, "onCreate: fingerprintMD5 > " + fingerprintMD5);
-
             }
-
-
             try {
                 MessageDigest md = MessageDigest.getInstance("SHA");
 //                md.update(sig.toByteArray());
