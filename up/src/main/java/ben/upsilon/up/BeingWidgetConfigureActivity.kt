@@ -48,7 +48,7 @@ class BeingWidgetConfigureActivity : Activity() {
             setResult(Activity.RESULT_OK, resultValue)
             finish()
         }
-        findViewById(R.id.add_button).setOnClickListener(mOnClickListener)
+        findViewById<View>(R.id.add_button).setOnClickListener(mOnClickListener)
 
         // Find the widget id from the intent.
         val intent = intent

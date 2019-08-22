@@ -16,20 +16,24 @@ import ben.upsilon.up.R
 data class DoneItem(val id: String, val content: String)
 
 class DoneItemAdapter(val items: List<DoneItem>, val mListener: OnListInteractionListener?) : RecyclerView.Adapter<DoneItemAdapter.ViewHolder>() {
+
+
+
+
     override fun getItemCount(): Int {
         Log.d("ben.upsilon", items.toString())
         return items.size;
     }
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder?.mContentView?.text = items[position].content
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.mContentView?.text = items[position].content
 
-        holder?.mView?.setOnClickListener({
+        holder.mView?.setOnClickListener{
             mListener?.onItem(items[position])
-        })
+        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, type: Int): ViewHolder? {
+    override fun onCreateViewHolder(parent: ViewGroup, type: Int): ViewHolder {
         val view = LayoutInflater.from(parent?.context).inflate(R.layout.item_done, parent, false)
         return ViewHolder(view)
     }
