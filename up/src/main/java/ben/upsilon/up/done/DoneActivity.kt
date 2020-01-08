@@ -1,16 +1,10 @@
 package ben.upsilon.up.done
 
 import android.app.Activity
-import android.app.Fragment
-import android.app.FragmentManager
 import android.app.FragmentTransaction
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.util.Log
 import ben.upsilon.up.R
 import ben.upsilon.up.done.DoneItemAdapter.OnListInteractionListener
-import java.util.*
 
 class DoneActivity : Activity() {
 
@@ -32,11 +26,6 @@ class DoneActivity : Activity() {
 
     var mListener: OnListInteractionListener? = null
 
-    override fun onResume() {
-        super.onResume()
-
-
-    }
 }
 
 

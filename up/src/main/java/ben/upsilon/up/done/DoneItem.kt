@@ -1,11 +1,11 @@
 package ben.upsilon.up.done
 
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import ben.upsilon.up.R
 
 /**
@@ -22,19 +22,19 @@ class DoneItemAdapter(val items: List<DoneItem>, val mListener: OnListInteractio
 
     override fun getItemCount(): Int {
         Log.d("ben.upsilon", items.toString())
-        return items.size;
+        return items.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.mContentView?.text = items[position].content
+        holder.mContentView.text = items[position].content
 
-        holder.mView?.setOnClickListener{
+        holder.mView.setOnClickListener {
             mListener?.onItem(items[position])
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, type: Int): ViewHolder {
-        val view = LayoutInflater.from(parent?.context).inflate(R.layout.item_done, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_done, parent, false)
         return ViewHolder(view)
     }
 

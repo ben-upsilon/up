@@ -1,1 +1,1 @@
-include ':up', ':syncup', ':rss'
+include ':up', ':syncup', ':rss', ':umap'

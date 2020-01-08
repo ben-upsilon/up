@@ -1,14 +1,11 @@
 package ben.upsilon.up.done
 
-import android.content.Context
+import android.app.Fragment
 import android.net.Uri
 import android.os.Bundle
-import android.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import ben.upsilon.up.R
 import kotlinx.android.synthetic.main.fragment_blank.*
 
@@ -42,28 +39,17 @@ class BlankFragment : Fragment() {
 
     wtf.text="$mParam1 +++ $mParam2"
     }
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup,
-                              savedInstanceState: Bundle?): View {
-        // Inflate the layout for this fragment
 
-        return inflater.inflate(R.layout.fragment_blank, container, false)
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater?.inflate(R.layout.fragment_blank, container, false)
     }
 
-    override fun onResume() {
-        super.onResume()
-
-    }
 
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
         if (mListener != null) {
             mListener!!.onFragmentInteraction(uri)
         }
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
     }
 
     override fun onDetach() {

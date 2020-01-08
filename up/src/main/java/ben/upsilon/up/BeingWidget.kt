@@ -6,15 +6,9 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.widget.RemoteViews
-
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.util.ArrayList
-import java.util.Collections
-import java.util.Date
-import java.util.EnumSet
-import java.util.LinkedHashMap
-import java.util.Locale
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**
@@ -69,7 +63,7 @@ class BeingWidget : AppWidgetProvider() {
                 val r = computeDiff(start, Date())
                 Log.d(TAG, "updateAppWidget: " + r.toString())
 
-                val widgetText = context.getString(R.string.appwidget_text, r[TimeUnit.DAYS], r[TimeUnit.HOURS], r[TimeUnit.MINUTES])
+                val widgetText = context.getString(R.string.appwidget_text, r[TimeUnit.DAYS].toString(), r[TimeUnit.HOURS].toString(), r[TimeUnit.MINUTES].toString())
 
                 // Construct the RemoteViews object
                 val views = RemoteViews(context.packageName, R.layout.being_widget)
