@@ -15,10 +15,12 @@ class MapActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         map.onResume()
+
     }
 
     override fun onPause() {
         super.onPause()
         map.onPause()
     }
+
 }
