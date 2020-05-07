@@ -1,6 +1,7 @@
 package ben.upsilon.umap
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -49,8 +50,15 @@ class MapActivity : AppCompatActivity() {
             }
 
         })
+        mMap?.setOnMapLoadedListener {
+            updateInfo()
+        }
+        mMap?.setOnMyLocationChangeListener {
+
+        }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun updateInfo() {
         txt_title.text = """
             cityCode > $mCityCode
@@ -88,6 +96,7 @@ class MapActivity : AppCompatActivity() {
         val busStationSearch: BusStationSearch = BusStationSearch(this, BusStationQuery("护林路", mCityCode))
         busStationSearch.setOnBusStationSearchListener { result, code ->
             Log.d(TAG, "setOnBusStationSearchListener code>$code result >${result}")
+            Log.d(TAG, "bus result >${result.busStations}")
         }
         busStationSearch.searchBusStationAsyn()
 
@@ -114,9 +123,12 @@ class MapActivity : AppCompatActivity() {
     private fun whereIsMe() {
         val myLocationStyle = MyLocationStyle()
         myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE)
+        myLocationStyle.showMyLocation(true)
         mMap?.myLocationStyle = myLocationStyle
         mMap?.isMyLocationEnabled = true
         mMap?.uiSettings?.isMyLocationButtonEnabled = true
+
+
     }
 
     private fun checkLocPermission() {
