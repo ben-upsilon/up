@@ -37,9 +37,7 @@
             android:name="com.amap.api.v2.apikey"
             android:value="a355b1424bcf1f327d80aa5860762889" />
 
-        <activity
-            android:name=".MapActivity"
-            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar">
+        <activity android:name=".MapActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

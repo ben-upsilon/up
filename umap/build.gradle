@@ -54,6 +54,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
+
     implementation 'androidx.core:core-ktx:1.2.0'
     //地图显示
     implementation 'com.amap.api:3dmap:7.4.0'
@@ -69,4 +70,6 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation "io.reactivex.rxjava3:rxkotlin:3.0.0"
+    implementation 'com.google.android.material:material:1.1.0'
+
 }
