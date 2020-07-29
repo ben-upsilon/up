@@ -17,6 +17,8 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val app=Cloud("")
+        app.core
 
         checkDrawOverlayPermission()
 
