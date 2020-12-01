@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion android_config.compile_sdk_version
-
+    buildToolsVersion = android_config.build_tools_version
     defaultConfig {
         applicationId "ben.upsilon.rss"
         minSdkVersion 22
@@ -21,7 +21,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion = android_config.build_tools_version
+
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8

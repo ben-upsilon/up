@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import ben.upsilon.DataManager
+import ben.upsilon.umap.databinding.ActivityMapBinding
 
 import com.amap.api.maps.AMap
 import com.amap.api.maps.AMapOptions
@@ -18,7 +19,6 @@ import com.amap.api.services.busline.BusStationQuery
 import com.amap.api.services.busline.BusStationSearch
 import com.amap.api.services.core.LatLonPoint
 import com.amap.api.services.geocoder.*
-import kotlinx.android.synthetic.main.activity_map.*
 
 class MapActivity : AppCompatActivity() {
     private val TAG = "MapActivity"
@@ -29,17 +29,21 @@ class MapActivity : AppCompatActivity() {
     private var mCityName: String? = ""
     private var mZoomLevel: Float = -1f
 
+    private lateinit var binding: ActivityMapBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_map)
-        map.onCreate(savedInstanceState)
-        mMap = map.map
+
+        binding = ActivityMapBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.map.onCreate(savedInstanceState)
+        mMap = binding.map.map
         mMap?.uiSettings?.logoPosition = AMapOptions.LOGO_POSITION_BOTTOM_CENTER
         mMap?.setOnMyLocationChangeListener { location ->
             initGeoCoder(LatLonPoint(location.latitude, location.longitude))
             mMap?.animateCamera(CameraUpdateFactory.zoomTo(17f))//3~17,数字越大展示越精细
         }
-        whereIsMe()
+
         mMap?.setOnCameraChangeListener(object : AMap.OnCameraChangeListener {
             override fun onCameraChangeFinish(position: CameraPosition?) {
                 mZoomLevel = position?.zoom ?: -1f
@@ -53,14 +57,17 @@ class MapActivity : AppCompatActivity() {
         mMap?.setOnMapLoadedListener {
             updateInfo()
         }
-        mMap?.setOnMyLocationChangeListener {
 
-        }
     }
+
+    private fun loc() {
+
+    }
+
 
     @SuppressLint("SetTextI18n")
     private fun updateInfo() {
-        txt_title.text = """
+        binding.txtTitle.text = """
             cityCode > $mCityCode
             cityName > $mCityName
             zoomLevel > $mZoomLevel
@@ -71,25 +78,26 @@ class MapActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         checkLocPermission()
-        map.onResume()
+        binding.map.onResume()
 
         DataManager.with(this)
         Log.d("MapActivity", DataManager.keys().toString())
+        whereIsMe()
     }
 
     override fun onPause() {
         super.onPause()
-        map.onPause()
+        binding.map.onPause()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        map.onDestroy()
+        binding.map.onDestroy()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        map.onSaveInstanceState(outState)
+        binding.map.onSaveInstanceState(outState)
     }
 
     private fun searchBusLineByCityCode(code: String) {
@@ -146,7 +154,6 @@ class MapActivity : AppCompatActivity() {
         when (requestCode) {
             ACCESS_FINE_LOCATION_REQUEST_CODE -> {
                 if (grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
-
                     whereIsMe()
                 }
             }

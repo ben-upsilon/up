@@ -1,10 +1,12 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 29
     buildToolsVersion android_config.build_tools_version
 
+    buildFeatures {
+        viewBinding true
+    }
 
     defaultConfig {
         applicationId "ben.upsilon.umap"
@@ -53,21 +55,21 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
 
-    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.core:core-ktx:1.3.2'
     //地图显示
     implementation 'com.amap.api:3dmap:7.5.0'
     //定位功能
-    implementation 'com.amap.api:location:5.1.0'
+    implementation 'com.amap.api:location:5.2.0'
     //搜索功能
     implementation 'com.amap.api:search:7.4.0'
 
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation "io.reactivex.rxjava3:rxkotlin:3.0.0"
-    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.android.material:material:1.2.1'
 
 }
