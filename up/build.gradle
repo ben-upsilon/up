@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
         applicationId "ben.upsilon.up"
-        minSdkVersion 23
-
+        minSdkVersion android_config.min_sdk_version
+        targetSdkVersion android_config.target_sdk_version
         versionCode 1
         versionName "1.0"
     }
@@ -20,13 +20,14 @@ android {
     packagingOptions {
         exclude 'META-INF/LICENSE'
     }
-    buildToolsVersion = '29.0.3'
+    buildToolsVersion  android_config.build_tools_version
 
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.4.20'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.5.20'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation "com.squareup.okhttp3:okhttp:4.9.0"
+    implementation "androidx.fragment:fragment-ktx:$android_config.fragment_ktx_version"
 }

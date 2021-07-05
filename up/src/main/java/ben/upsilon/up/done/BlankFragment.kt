@@ -1,13 +1,13 @@
 package ben.upsilon.up.done
 
-import android.app.Fragment
+
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import ben.upsilon.up.R
-import kotlinx.android.synthetic.main.fragment_blank.*
 
 /**
  * A simple [Fragment] subclass.
@@ -28,8 +28,8 @@ class BlankFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            mParam1 = arguments.getString(ARG_PARAM1)
-            mParam2 = arguments.getString(ARG_PARAM2)
+            mParam1 = arguments?.getString(ARG_PARAM1)
+            mParam2 = arguments?.getString(ARG_PARAM2)
         }
     }
 
@@ -37,11 +37,11 @@ class BlankFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-    wtf.text="$mParam1 +++ $mParam2"
+//    wtf.text="$mParam1 +++ $mParam2"
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_blank, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_blank, container, false)
     }
 
 
