@@ -26,5 +26,5 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.5.20'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.5.31'
 }
