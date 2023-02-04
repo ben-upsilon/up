@@ -3,7 +3,6 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion android_config.compile_sdk_version
-    buildToolsVersion android_config.build_tools_version
     defaultConfig {
         applicationId "ben.upsilon.rss"
         minSdkVersion android_config.min_sdk_version

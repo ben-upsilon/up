@@ -1,1 +1,2 @@
 include ':up', ':syncup', ':rss', ':umap'
+include ':up-browser'

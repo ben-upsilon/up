@@ -20,7 +20,6 @@ android {
     packagingOptions {
         exclude 'META-INF/LICENSE'
     }
-    buildToolsVersion  android_config.build_tools_version
 
 }
 
@@ -28,6 +27,6 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation "com.squareup.okhttp3:okhttp:4.9.2"
+    implementation "com.squareup.okhttp3:okhttp:4.10.0"
     implementation "androidx.fragment:fragment-ktx:$android_config.fragment_ktx_version"
 }

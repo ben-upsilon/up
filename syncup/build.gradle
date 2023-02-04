@@ -1,7 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-
 android {
     compileSdkVersion android_config.compile_sdk_version
 
@@ -21,7 +19,6 @@ android {
     packagingOptions {
         exclude 'META-INF/LICENSE'
     }
-    buildToolsVersion = '29.0.3'
 }
 
 dependencies {
